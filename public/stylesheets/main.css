@@ -1,0 +1,42 @@
+/*.votes, .text, .answer, .question, .tags {
+	margin: 15px;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+.votes, .text, .answer, .tags {
+	background-color: rgb(200, 200, 200);
+}
+
+#formview {
+	margin: 0 auto;
+	display: block;
+	padding: 5px;
+	background-color: #CCC;
+	border-radius: 5px;
+}
+
+.upvote, .downvote, #formview > * {
+	margin: 5px;
+	padding: 5px;
+	border: 0px;
+	border-radius: 3px;
+	background-color: #000;
+	color: #CCC;
+}
+
+#textinput, #wronganswersinput {
+	width: 400px;
+}*/
+
+/*.topbar {
+	background-color: black;
+}*/
+
+#formview {
+	margin-top: 60px;
+}
+
+#formview > * {
+	margin: 8px;
+}

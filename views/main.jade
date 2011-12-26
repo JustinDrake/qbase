@@ -1,0 +1,38 @@
+!!! 5
+
+html(lang='en')
+	head
+		title Question bank
+		script(data-main='javascripts/configurations', src='javascripts/dependencies/require-jquery.js')
+		//link(rel='stylesheet', href='/stylesheets/reset.css')
+		link(rel='stylesheet', href='/stylesheets/main.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap-1.4.0.css')
+	body
+		.topbar
+			.fill
+				.container
+					h3
+						a(href='#') QuestionBank
+					ul
+						li.active
+							a#showform(href='#') Contribute question
+						li
+							a(href='#') About
+						li
+							a(href='#') Projects
+						li
+							a(href='#') Contact
+
+		center
+			form#formview
+				input#textinput.span8(type='text', placeholder='Question (140 characters max)', maxlength='140')
+				br
+				input#answerinput.span2(type='text', placeholder='Correct answer')
+				input#wronganswersinput.span4(type='text', placeholder='Wrong answers (separated by semicolons)')
+				input#tagsinput.span2(type='text', placeholder='Semantic tag')
+				br
+				input#addbutton.primary.btn(type='button', value='Add question')
+				input#cancelbutton.btn(type='button', value='Cancel')
+
+		table.zebra-striped
+			tbody#questioncontainer

@@ -1,0 +1,31 @@
+<tr class='question' id='<% if(typeof _id != 'undefined') { %><%=_id %><% } %>'>
+	<td>
+		<span class='label votes'><%= upVotes - downVotes %></span>
+		<span class='lalel views'><%= views %></span>
+	</td>
+	<td>
+		<span class='timeago' title='<%= date %>'></span>
+	</td>
+
+	<td><span class='text'><%= text %></span></td>
+
+	<td>
+		<% _.each(tags, function(tag) { %>
+			<span class='label tags'><%= tag %></span>
+		<% }); %>
+	</td>
+</tr>
+<tr class='answersview'>
+	<td>
+		<span class='label success upvote'>+</span>
+		<span class='label important downvote'>-</span>
+	</td>
+	<td></td>
+	<td>
+		<span class='label success answer'><%= answer %></span>
+		<% _.each(wrongAnswers, function(wrongAnswer) { %>
+			<span class='label important wronganswer'><%= wrongAnswer %></span>
+		<% }); %>
+	</td>
+	<td></td>
+</tr>
