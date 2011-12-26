@@ -19,7 +19,7 @@ app.configure(function () {
 require('./routes/routes')(app, question);
 
 // We are now live!
-app.listen(36646);
+app.listen(5919);
 console.log("Server up and running!");
 
 // app.get('/socketio', function (request, response) {
