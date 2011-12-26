@@ -1,4 +1,4 @@
-var mongoose = require('mongoose').connect('mongodb://randomblue:camparifred@staff.mongohq.com:10006/app2220777/qbase'),
+var mongoose = require('mongoose').connect('mongodb://randomblue:camparifred@staff.mongohq.com:10006/app2220777'),
 	Question = mongoose.model('questions', new mongoose.Schema({
 		text : { type: String, default: '[The question goes here.]' },
 		date : { type: Date, default: Date.now },
