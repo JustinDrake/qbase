@@ -14,7 +14,7 @@ var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.m
 function add(question, next) {
 	(new Question(question)).save(function (error) {
 		if (error) {
-			console.error('Error when adding a new question!', error);
+			console.error('Error when adding a new question.', error);
 		} else if (next) {
 			next();
 		}
@@ -22,15 +22,54 @@ function add(question, next) {
 }
 
 function remove(id, next) {
-	Question.findById(id, function (error, document) {
-		if (error) {
-			console.error('Error when removing a question!');
-		} else {
-			console.log('Removed question ' + id);
-			next();
-		}
-		document.remove()
-	});
+	Question
+		.findById(id, function (error, document) {
+			if (error) {
+				console.error('Error when removing a question.');
+			} else {
+				console.log('Removed question ' + id);
+
+				if(next) {
+					next();
+				}
+			}
+			document.remove()
+		});
+}
+
+function latest(limit, next) {
+	console.log('Requesting latest!');
+	
+	Question
+		.find({})
+		.sort('date', -1)
+		.limit(limit)
+		.exec(function (error, documents) {
+			if (error) {
+				console.error('Error in getting the latest questions.');
+			} else if (next) {
+				Question.update({}, { $inc: { views: +1} })
+				next(documents);
+			}
+		});
+}
+
+function incrementViewCount(id, next) {
+	Question
+		.findById(id, function (error, document) {
+			if (error) {
+				console.error('Error when incrementing view count.');
+			} else {
+				document
+					.update({
+						$inc: {views: +1}
+					});
+
+				if (next) {
+					next();
+				}
+			}
+		});
 }
 
 function modify(question) {
@@ -56,26 +95,10 @@ function modify(question) {
 	});
 }
 
-function latest(limit, next) {
-	limit = limit || 5;
-
-	Question
-		.find({})
-		.sort('date', -1)
-		.limit(limit)
-		.exec(function (error, documents) {
-			if (error) {
-				console.error('Error in getting the latest questions');
-			}
-			next(documents);
-		});
-}
-
-function update(id, attribute, value) {}
-
 module.exports = {
 	add: add,
 	remove: remove,
 	modify: modify,
-	latest: latest
+	latest: latest,
+	incrementViewCount: incrementViewCount
 }
