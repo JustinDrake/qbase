@@ -15,4 +15,10 @@ module.exports = function (app, question) {
 			response.send();
 		});
 	});
+
+	app.delete('/questions/:id', function (request, response) {
+		question.remove(request.params.id, function () {
+			response.send();			
+		});
+	})
 }

@@ -14,18 +14,18 @@
 			<span class='label tags'><%= tag %></span>
 		<% }); %>
 	</td>
-</tr>
-<tr class='answersview'>
+
 	<td>
 		<span class='label success upvote'>+</span>
 		<span class='label important downvote'>-</span>
 	</td>
-	<td></td>
 	<td>
 		<span class='label success answer'><%= answer %></span>
 		<% _.each(wrongAnswers, function(wrongAnswer) { %>
 			<span class='label important wronganswer'><%= wrongAnswer %></span>
 		<% }); %>
 	</td>
-	<td></td>
+	<td>
+		<span class='label remove'>Remove</span>
+	</td>
 </tr>

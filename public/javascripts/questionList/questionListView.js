@@ -1,15 +1,32 @@
-define(['underscore', 'backbone', 'questionList'], function (_, Backbone, questionList) {
-	var QuestionListView = Backbone.View.extend({
-		el: '#questioncontainer',
-		events: {
-			'click .question': 'showQuiz'
-		},
-		showQuiz: function () {
-			this.
-		}
-	});
+define(['underscore', 'backbone', 'questionList', 'QuestionView'],
+	function (_, Backbone, questionList, QuestionView) {
+		var QuestionListView = Backbone.View.extend({
+			initialize: function () {
+				this.collection.bind('add', this.addView, this);
+				this.collection.bind('remove', this.removeView, this);
+			},
+			el: '#questioncontainer',
+			addView: function (model) {
+				var questionView = new QuestionView({
+					model: model
+				});
 
-	var questionListView = new QuestionListView();
+				questionView.el
+					.hide()
+					.prependTo(this.el)
+					.fadeIn();
 
-	return questionListView;
-});
+				$('.timeago').timeago();
+			},
+			removeView: function (model, collection) {
+				console.log('View removed from collection');
+			}
+		});
+
+		var questionListView = new QuestionListView({
+			collection: questionList
+		});
+
+		return questionListView;
+	}
+);

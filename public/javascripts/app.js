@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'formView'
+	'formView',
+	'questionListView'
 ], function ($, _, Backbone) {
 	if ($ && _ && Backbone) {
 		console.log('jquery', $().jquery, 'underscore', _.VERSION, 'Backbone', Backbone.VERSION);

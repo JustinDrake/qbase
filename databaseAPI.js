@@ -21,12 +21,13 @@ function add(question, next) {
 	});
 }
 
-function remove(id) {
+function remove(id, next) {
 	Question.findById(id, function (error, document) {
 		if (error) {
 			console.error('Error when removing a question!');
 		} else {
 			console.log('Removed question ' + id);
+			next();
 		}
 		document.remove()
 	});
