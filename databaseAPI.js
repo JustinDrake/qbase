@@ -39,7 +39,7 @@ function remove(id, next) {
 
 function latest(limit, next) {
 	console.log('Requesting latest!');
-	
+
 	Question
 		.find({})
 		.sort('date', -1)
@@ -48,6 +48,7 @@ function latest(limit, next) {
 			if (error) {
 				console.error('Error in getting the latest questions.');
 			} else if (next) {
+				console.log('Got the latest!');
 				Question.update({}, { $inc: { views: +1} })
 				next(documents);
 			}
