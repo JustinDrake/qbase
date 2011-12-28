@@ -12,9 +12,13 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				});
 
 				questionView.el
-					.hide()
-					.prependTo(this.el)
-					.fadeIn();
+					.hide();
+
+				$(function () {
+					questionView
+						.prependTo(this.el)
+						.fadeIn();						
+				});
 
 				$('.timeago').timeago();
 			},
