@@ -6,6 +6,7 @@ module.exports = function (app, question) {
 
 	app.get('/questions', function (request, response) {
 		question.latest(15, function (questions) {
+			console.log('Sending response');
 			response.send(questions);
 		});
 	});
