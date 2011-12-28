@@ -9,7 +9,7 @@ var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.m
 		author : { type: String, default: 'Anonymous' },
 		upVotes : { type: Number, default: 0 },
 		downVotes : { type: Number, default: 0 },
-		views : { type: Number, default: 0}
+		views : { type: Number, default: 1}
 	}));
 
 function getIP(request) {
@@ -19,7 +19,7 @@ function getIP(request) {
 function add(request, next) {
 	var question = request.body;
 
-	console.log(question.author = getIP(request));
+	question.author = getIP(request);
 
 	(new Question(question)).save(function (error) {
 		if (error) {
@@ -45,20 +45,34 @@ function remove(id, next) {
 }
 
 function latest(limit, next) {
-	console.log('Requesting latest!');
 
 	Question
 		.find({})
 		.sort('date', -1)
 		.limit(limit)
-		.exec(function (error, documents) {
-			if (error) {
-				console.error('Error in getting the latest questions.');
-			} else if (next) {
-				Question.update({}, { $inc: { views: +1} })
-				next(documents);
+		.exec(
+			function (error, documents) {
+				if (error) {
+					console.error('Error in getting the latest questions.', error);
+				} else {
+
+					// Bump the view count of all requested documents
+					Question.update(documents, {
+						$inc: { views: 1 }
+					}, {
+						multi: true
+					}, function (error) {
+						if (error) {
+							console.error('Error in updating the views.', error)
+						} else {
+							if (next) {
+								next(documents);						
+							}
+						}
+					});
+				}
 			}
-		});
+		);
 }
 
 function incrementViewCount(id, next) {

@@ -13,7 +13,9 @@ define(['underscore', 'backbone', 'QuestionModel', 'text!question/questionTempla
 						console.error('Error in fetching the questions!', response);
 					},
 					success: function (collection, response) {
-						collection.add(response);
+						collection.add(_.sortBy(response, function (element) {
+							return element.date;
+						}));
 					}
 				});				
 			}

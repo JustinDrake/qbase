@@ -3,7 +3,6 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 		var QuestionListView = Backbone.View.extend({
 			initialize: function () {
 				this.collection.bind('add', this.addView, this);
-				this.collection.bind('remove', this.removeView, this);
 			},
 			el: '#questioncontainer',
 			addView: function (model) {
@@ -18,16 +17,12 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				var element = this.el;
 
 				$(function () {
-					console.log('Adding view', questionView.el, element);
 					questionView.el
 						.prependTo(element)
 						.fadeIn();						
 				});
 
 				$('.timeago').timeago();
-			},
-			removeView: function (model, collection) {
-				console.log('View removed from collection');
 			}
 		});
 

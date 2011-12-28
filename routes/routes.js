@@ -5,7 +5,7 @@ module.exports = function (app, question) {
 	});
 
 	app.get('/questions', function (request, response) {
-		question.latest(15, function (questions) {
+		question.latest(5, function (questions) {
 			response.send(questions);
 		});
 	});

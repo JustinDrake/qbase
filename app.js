@@ -20,7 +20,7 @@ require('./routes/routes')(app, question);
 
 // We are now live!
 app.listen(process.env.PORT || 3000);
-console.log("Server up and running!");
+// console.log("Server up and running!");
 
 // app.get('/socketio', function (request, response) {
 // 	response.sendfile(__dirname + '/socketio.html');
