@@ -1,3 +1,4 @@
+//var mongoose = require('mongoose').connect('mongodb://localhost/qbase'),
 var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777'),
 	Question = mongoose.model('questions', new mongoose.Schema({
 		text : { type: String, default: '[The question goes here.]' },
@@ -35,8 +36,6 @@ function remove(id, next) {
 			if (error) {
 				console.error('Error when removing a question.');
 			} else {
-				console.log('Removed question ' + id);
-
 				if(next) {
 					next();
 				}
@@ -56,7 +55,6 @@ function latest(limit, next) {
 			if (error) {
 				console.error('Error in getting the latest questions.');
 			} else if (next) {
-				console.log('Got the latest!');
 				Question.update({}, { $inc: { views: +1} })
 				next(documents);
 			}

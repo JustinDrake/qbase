@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'QuestionModel'],
+define(['underscore', 'backbone', 'QuestionModel', 'text!question/questionTemplate.html'],
 	function (_, Backbone, QuestionModel, QuestionView) {
 
 		var QuestionList = Backbone.Collection.extend({

@@ -18,6 +18,7 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				var element = this.el;
 
 				$(function () {
+					console.log('Adding view', questionView.el, element);
 					questionView.el
 						.prependTo(element)
 						.fadeIn();						

@@ -12,13 +12,7 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 			this.el = $(this.template(this.options.model.toJSON()));
 		},
 		suicide: function () {
-			this.el.fadeTo(0.1);
-			
-			this.model.destroy({
-				error: function () {
-					this.el.fadeTo(1);
-				}
-			});
+			this.model.destroy();
 		},
 		template: _.template(questionTemplate)
 	});

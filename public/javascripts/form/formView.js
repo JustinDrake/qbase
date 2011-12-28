@@ -13,6 +13,7 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 		addQuestion: function () {
 			var $el = $(this.el);
 
+			console.log('Creating question...');
 			var newQuestion = questionList.create({
 				text: $el.find('#textinput').val() === '' ? undefined : $el.find('#textinput').val(),
 				answer: $el.find('#answerinput').val() === '' ? undefined : $el.find('#answerinput').val(),
