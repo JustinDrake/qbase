@@ -15,7 +15,7 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 					.hide();
 
 				$(function () {
-					questionView
+					questionView.el
 						.prependTo(this.el)
 						.fadeIn();						
 				});
