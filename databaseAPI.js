@@ -5,13 +5,21 @@ var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.m
 		answer : { type: String, default: '[The answer goes here.]' },
 		wrongAnswers : { type: Array, default: [] },
 		tags : { type: Array, default: [] },
-		author : { type: String, default: 'Justin' },
+		author : { type: String, default: 'Anonymous' },
 		upVotes : { type: Number, default: 0 },
 		downVotes : { type: Number, default: 0 },
 		views : { type: Number, default: 0}
 	}));
 
-function add(question, next) {
+function getIP(request) {
+	return request.connection.remoteAddress;
+}
+
+function add(request, next) {
+	var question = request.body;
+
+	console.log(question.author = getIP(request));
+
 	(new Question(question)).save(function (error) {
 		if (error) {
 			console.error('Error when adding a new question.', error);

@@ -4,7 +4,6 @@ html(lang='en')
 	head
 		title Question bank
 		script(data-main='javascripts/configurations', src='javascripts/dependencies/require-jquery.js')
-		//link(rel='stylesheet', href='/stylesheets/reset.css')
 		link(rel='stylesheet', href='/stylesheets/main.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap-1.4.0.css')
 	body
@@ -25,14 +24,14 @@ html(lang='en')
 
 		center
 			form#formview
-				input#textinput.span8(type='text', placeholder='Question (140 characters max)', maxlength='140')
+				input#textinput.span9(type='text', placeholder='Question (140 characters max)', maxlength='140')
 				br
-				input#answerinput.span2(type='text', placeholder='Correct answer')
-				input#wronganswersinput.span4(type='text', placeholder='Wrong answers (separated by semicolons)')
-				input#tagsinput.span2(type='text', placeholder='Semantic tag')
+				input#answerinput.span3(type='text', placeholder='Correct answer')
+				input#wronganswersinput.span4(type='text', placeholder='Wrong answers')
+				input#tagsinput.span3(type='text', placeholder='Tags')
 				br
 				input#addbutton.primary.btn(type='button', value='Add question')
-				input#cancelbutton.btn(type='button', value='Cancel')
+				input#cancelbutton.btn(type='button', value='Hide form')
 
 		table.zebra-striped
 			tbody#questioncontainer
