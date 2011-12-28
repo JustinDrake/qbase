@@ -14,7 +14,9 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				questionView.el
 					.hide();
 
+				console.log('Inside addView!');
 				$(function () {
+					console.log('View fired!');
 					questionView.el
 						.prependTo(this.el)
 						.fadeIn();						
