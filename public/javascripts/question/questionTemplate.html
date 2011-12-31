@@ -5,8 +5,8 @@
 	</td>
 
 	<td>
-		<span class='label votes'><%= upVotes - downVotes %></span><span> votes</span><br/>
-		<span class='label views'><%= views %></span><span> views</span>
+		<span class='label votes'><%= upVotes - downVotes %></span><span>&nbsp;votes</span><br/>
+		<span class='label views'><%= views %></span><span>&nbsp;views</span>
 	</td>
 
 	<td>
@@ -15,23 +15,20 @@
 	</td>
 
 	<td>
-		<span class='text'><%= text %></span>
-	</td>
-
-	<td>
+		<span class='text'><%= text %></span><br/>
 		<% _.each(tags, function(tag) { %>
 			<span class='label tags'><%= tag %></span>
 		<% }); %>
 	</td>
 
 	<td>
-		<%if (answer !== '') { %><span class='label success answer'><%= answer %></span><% } %>
+		<%if (answer !== '') { %><span class='label success answer'><%= answer %></span><% } %><br/>
 		<% _.each(wrongAnswers, function(wrongAnswer) { %>
 			<span class='label important wronganswer'><%= wrongAnswer %></span>
 		<% }); %>
 	</td>
 
 	<td>
-		<span class='label remove important'>X</span>
+		<span class='label remove'>Remove</span>
 	</td>
 </tr>

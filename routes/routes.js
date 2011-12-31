@@ -20,5 +20,18 @@ module.exports = function (app, question) {
 		question.remove(request.params.id, function () {
 			response.send();			
 		});
-	})
+	});
+
+	app.post('/upvote/:id', function (request, response) {
+		question.upvote(request.params.id, function () {
+			response.send();
+		});
+	});
+
+	app.post('/downvote/:id', function (request, response) {
+		question.downvote(request.params.id, function () {
+			response.send();
+		});
+	});
+
 }

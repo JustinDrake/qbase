@@ -93,6 +93,42 @@ function incrementViewCount(id, next) {
 		});
 }
 
+function upvote(id, next) {
+	Question
+		.findById(id, function (error, document) {
+			if (error) {
+				console.error('Error when + voting.');
+			} else {
+				document
+					.update({
+						$inc: {upvote: 1}
+					});
+
+				if (next) {
+					next();
+				}
+			}
+		});
+}
+
+function downvote(id, next) {
+	Question
+		.findById(id, function (error, document) {
+			if (error) {
+				console.error('Error when - voting.');
+			} else {
+				document
+					.update({
+						$inc: {upvote: -1}
+					});
+
+				if (next) {
+					next();
+				}
+			}
+		});
+}
+
 function modify(question) {
 	Question.findById(question._id, function (error, document) {
 		if (error) {
@@ -121,5 +157,7 @@ module.exports = {
 	remove: remove,
 	modify: modify,
 	latest: latest,
-	incrementViewCount: incrementViewCount
+	incrementViewCount: incrementViewCount,
+	upvote: upvote,
+	downvote: downvote
 }

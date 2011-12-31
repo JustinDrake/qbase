@@ -40,3 +40,7 @@
 #formview > * {
 	margin: 8px;
 }
+
+.upvote, .downvote, .remove {
+	visibility: hidden;
+}

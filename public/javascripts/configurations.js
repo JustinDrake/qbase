@@ -8,6 +8,7 @@ require.config({
 		'QuestionModel': 'question/QuestionModel',
 		'QuestionView': 'question/QuestionView',
 		'timeago': 'dependencies/jQueryPlugins/jquery.timeago',
+		'tagsinput': 'dependencies/jQueryPlugins/jquery.tagsinput.min.js',
 		'navigationView': 'navigationView'
 	}
 });

@@ -3,6 +3,18 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 		var QuestionListView = Backbone.View.extend({
 			initialize: function () {
 				this.collection.bind('add', this.addView, this);
+
+				$(this.el).on('mouseover', '.question', function () {
+					$(this)
+						.find('.upvote, .downvote, .remove')
+						.css('visibility', 'visible');
+				});
+
+				$(this.el).on('mouseout', '.question', function () {
+					$(this)
+						.find('.upvote, .downvote, .remove')
+						.css('visibility', 'hidden');
+				});
 			},
 			el: '#questioncontainer',
 			addView: function (model) {

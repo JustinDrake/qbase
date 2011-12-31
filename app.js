@@ -1,7 +1,17 @@
 var express = require('express'),
+    everyauth = require('everyauth'),
 	question = require('./databaseAPI'),
+	util = require('util'),
 	app = express.createServer();
-//	io = require('socket.io').listen(app); -> For later :)
+
+everyauth
+	.twitter
+	.consumerKey('adsf')
+	.consumerSecret('asdf')
+	.findOrCreateUser(function (session, accessToekn, accessTokenSecret, twitterUserData) {
+		console.log(util.inspect(twitterUserData));
+	});
+
 
 // Express configurations
 app.configure(function () {
@@ -9,29 +19,19 @@ app.configure(function () {
 	app.set('view engine', 'jade');
 	app.set('view options', { layout: false });
 	app.use(express.bodyParser());
+	app.use(express.cookieParser());
+	app.use(express.session({ secret: 'Test'}));
+	app.use(everyauth.middleware());	
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.static(__dirname + '/public'));
+
 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 
-// I put all my routing code here
 require('./routes/routes')(app, question);
 
-// We are now live!
 app.listen(process.env.PORT || 3000);
-// console.log("Server up and running!");
-
-// app.get('/socketio', function (request, response) {
-// 	response.sendfile(__dirname + '/socketio.html');
-// });
-
-// io.sockets.on('connection', function (socket) {
-// 	socket.emit('news', { hello: 'world'});
-// 	socket.on('my other event', function (data) {
-// 		console.log(data);
-// 	});
-// });
 
 // Start a REPL for debugging
 // require('repl').start('> ').context.question = question;
