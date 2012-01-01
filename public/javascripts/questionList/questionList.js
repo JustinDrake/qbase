@@ -1,6 +1,5 @@
 define(['underscore', 'backbone', 'QuestionModel', 'text!question/questionTemplate.html'],
 	function (_, Backbone, QuestionModel, QuestionView) {
-
 		var QuestionList = Backbone.Collection.extend({
 			model: QuestionModel,
 			url: '/questions',
@@ -11,11 +10,6 @@ define(['underscore', 'backbone', 'QuestionModel', 'text!question/questionTempla
 				this.fetch({
 					error: function (collection, response) {
 						console.error('Error in fetching the questions!', response);
-					},
-					success: function (collection, response) {
-						collection.add(_.sortBy(response, function (element) {
-							return element.date;
-						}));
 					}
 				});				
 			}

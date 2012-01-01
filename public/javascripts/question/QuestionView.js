@@ -3,12 +3,14 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 		initialize: function () {
 			this.model.bind('destroy', this.destroySelf, this);
 			this.model.bind('change:upVotes', this.refreshVotes, this);
+			this.model.bind('change:downVotes', this.refreshVotes, this);
 			this.render();
 			this.delegateEvents();
 		},
 		events: {
 			'click .remove': 'destroyModel',
-			'click .upvote': 'upvote'
+			'click .upvote': 'upvote',
+			'click .downvote': 'downvote'
 		},
 		render: function () {
 			console.log('Rendering view');
@@ -35,9 +37,18 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 				upVotes : newUpVotes
 			});
 
-			this.model.save(['upVotes']);
+			this.model.save();
 		},
-		template: _.template(questionTemplate)
+		template: _.template(questionTemplate),
+		downvote: function () {
+			console.log('Test')
+			var newDownVotes = this.model.get('downVotes') + 1;
+			this.model.set({
+				downVotes : newDownVotes
+			});
+
+			this.model.save();
+		}
 	});
 
 	return QuestionView;

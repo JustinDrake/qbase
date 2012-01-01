@@ -1,8 +1,16 @@
 module.exports = function (app, question) {
 
+	function sendOK(response) {
+		response.send();
+	}
+
+// MAIN
+
 	app.get('/', function (request, response) {
 		response.render('main');
 	});
+
+// QUESTIONS
 
 	app.get('/questions', function (request, response) {
 		question.latest(5, function (questions) {
@@ -11,27 +19,24 @@ module.exports = function (app, question) {
 	});
 
 	app.post('/questions', function (request, response) {
-		question.add(request, function () {
-			response.send();
-		});
+		question.add(request, sendOK(response));
 	});
 
 	app.delete('/questions/:id', function (request, response) {
-		question.remove(request.params.id, function () {
-			response.send();			
-		});
+		question.remove(request.params.id, sendOK(response));
 	});
 
-	app.post('/upvote/:id', function (request, response) {
-		question.upvote(request.params.id, function () {
-			response.send();
-		});
+	app.put('/questions/:id', function (request, response) {
+		question.save(request.body, sendOK(response));
 	});
 
-	app.post('/downvote/:id', function (request, response) {
-		question.downvote(request.params.id, function () {
-			response.send();
-		});
-	});
+// SEARCH
 
+	app.get('/search', function (request, response) {
+		for(var a in request.query) {
+			question.search(a, function (documents) {
+				response.send(documents);
+			});
+		}
+	});
 }

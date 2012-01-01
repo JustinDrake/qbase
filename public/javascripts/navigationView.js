@@ -1,26 +1,25 @@
-console.log('Inside navigation view');
-
-define(['jquery', 'underscore', 'backbone', 'formView'], function ($, _, Backbone, formView) {
+define(['underscore', 'backbone', 'formView', 'searchView'], function (_, Backbone, formView, searchView) {
 	var NavigationView = Backbone.View.extend({
-		el: '.container',
+		el: '#navigation',
 		events: {
-			'click #showform': 'showForm'
+			'click #showform': 'showForm',
+			'click #showsearch': 'showSearch'
 		},
-		initialize: function () {
-			
+		showForm: function (event) {
+			$('.active').removeClass('active');
+			$(event.currentTarget).parent().addClass('active');
+			$(formView.el).show()
+			$(searchView.el).hide();
 		},
-		showForm: function () {
-			console.log('Inside showForm')
-			console.log(this.options.formView);
-			this.options.formView.show();
+		showSearch: function (event) {
+			$('.active').removeClass('active');
+			$(event.currentTarget).parent().addClass('active');			
+			$(searchView.el).show();
+			$(formView.el).hide();
 		}
 	});
 
-	console.log('Inside navigationView', $().jquery, _.VERSION, Backbone.VERSION, formView);
-
-	var navigationView = new NavigationView({
-		formView: formView
-	});
+	var navigationView = new NavigationView();
 
 	return navigationView;
 });

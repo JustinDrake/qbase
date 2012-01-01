@@ -129,7 +129,7 @@ function downvote(id, next) {
 		});
 }
 
-function modify(question) {
+function save(question) {
 	Question.findById(question._id, function (error, document) {
 		if (error) {
 			console.error('Error when modifying the question!');
@@ -152,12 +152,26 @@ function modify(question) {
 	});
 }
 
+function search(query, next) {
+	Question.find({
+		tags: { $all: [query] }
+	}, function (error, documents) {
+		if (error) {
+			return;
+		}
+		if (next) {
+			next(documents);
+		}
+	});
+}
+
 module.exports = {
 	add: add,
 	remove: remove,
-	modify: modify,
+	save: save,
 	latest: latest,
 	incrementViewCount: incrementViewCount,
 	upvote: upvote,
-	downvote: downvote
+	downvote: downvote,
+	search: search
 }

@@ -6,29 +6,33 @@ html(lang='en')
 		script(data-main='javascripts/configurations', src='javascripts/dependencies/require-jquery.js')
 		link(rel='stylesheet', href='/stylesheets/main.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap-1.4.0.css')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui-1.8.16.custom.css')
 	body
-		.topbar
+		.topbar#navigation
 			.fill
 				.container
 					h3
-						a(href='#') QuestionBank
+						a(href='/') QuestionBank
 					ul
 						li.active
-							a#showform(href='#') Contribute question
+							a#showform(href='#') Contribute a question
 						li
-							a(href='#') About
-						li
-							a(href='#') Projects
-						li
-							a(href='#') Contact
+							a#showsearch(href='#') Search by Wikipedia article
 
 		center
-			form#formview
-				input#textinput.span9(type='text', placeholder='Question (140 characters max)', maxlength='140')
+			form#searchview
+				input#searchinput.span9(type='text', placeholder='Which Wikipedia article?')
 				br
-				input#answerinput.span3(type='text', placeholder='Correct answer')
-				input#wronganswersinput.span4(type='text', placeholder='Wrong answers')
-				input#tagsinput.span3(type='text', placeholder='Tags')
+				input#searchbutton.primary.btn(type='button', value='Search')
+				input#cancelsearch.btn(type='button', value='Cancel search')
+
+			form#formview
+				input#articleinput.span9(type='text', placeholder='What Wikipedia article?')
+				br
+				input#textinput.span9(type='text', placeholder='What is your question?', maxlength='140')
+				br
+				input#answerinput.span3(type='text', placeholder='The correct answer')
+				input#wronganswersinput.span4(type='text', placeholder='Some wrong answers')
 				br
 				input#addbutton.primary.btn(type='button', value='Add question')
 				input#cancelbutton.btn(type='button', value='Hide form')

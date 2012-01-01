@@ -29,16 +29,16 @@
 	width: 400px;
 }*/
 
-/*.topbar {
-	background-color: black;
-}*/
-
-#formview {
+#formview, #searchview {
 	margin-top: 50px;
 }
 
-#formview > * {
+#formview > *, #searchview > * {
 	margin: 8px;
+}
+
+#searchview {
+	display: none;
 }
 
 .upvote, .downvote, .remove {
