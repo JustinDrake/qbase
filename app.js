@@ -2,6 +2,7 @@ var express = require('express'),
     everyauth = require('everyauth'),
 	question = require('./databaseAPI'),
 	util = require('util'),
+	Promise = everyauth.Promise,
 	app = express.createServer();
 
 everyauth
@@ -9,8 +10,12 @@ everyauth
 	.consumerKey('JPKjV09pV05ShPYN1NUnhw')
 	.consumerSecret('y3i12vM6BYyAg4cdMfnWsB7EPZdZU1h8RE6bXZvcCM')
 	.findOrCreateUser(function (session, accessToken, accessTokenSecret, twitterUserData) {
+		var promise = new Promise();
 		console.log(util.inspect(twitterUserData));
-	});
+		findOrCreateFromTwitterData(twitterUserData, promise);
+		return promise;
+	})
+	.redirectPath('/');
 
 // Express configurations
 app.configure(function () {

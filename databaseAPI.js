@@ -1,6 +1,8 @@
 //var mongoose = require('mongoose').connect('mongodb://localhost/qbase'),
-var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777'),
-	Question = mongoose.model('questions', new mongoose.Schema({
+var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777');
+
+var Question = mongoose.model('questions',
+	new mongoose.Schema({
 		text : { type: String, default: '[The question goes here.]' },
 		date : { type: Date, default: Date.now },
 		answer : { type: String, default: '[The answer goes here.]' },
@@ -10,7 +12,21 @@ var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.m
 		upVotes : { type: Number, default: 0 },
 		downVotes : { type: Number, default: 0 },
 		views : { type: Number, default: 1}
-	}));
+	})
+);
+
+var User = mongoose.model('users',
+	new mongoose.Scheme({
+		registrationDate : { type: Date, default: Date.now },
+		username : { type: String, default: [No username set!] }
+	})
+);
+
+function findOrCreateFromTwitterData = function(twitterData, promise) {
+	console.log('Twitter data:', twitterData);
+	promise.fulfill({message: 'Yes!'});
+	return;
+}
 
 function getIP(request) {
 	return request.connection.remoteAddress;
@@ -173,5 +189,6 @@ module.exports = {
 	incrementViewCount: incrementViewCount,
 	upvote: upvote,
 	downvote: downvote,
-	search: search
+	search: search,
+	findOrCreateFromTwitterData: findOrCreateFromTwitterData
 }
