@@ -1,17 +1,16 @@
 var express = require('express'),
-//    everyauth = require('everyauth'),
+    everyauth = require('everyauth'),
 	question = require('./databaseAPI'),
 	util = require('util'),
 	app = express.createServer();
 
-// everyauth
-// 	.twitter
-// 	.consumerKey('adsf')
-// 	.consumerSecret('asdf')
-// 	.findOrCreateUser(function (session, accessToekn, accessTokenSecret, twitterUserData) {
-// 		console.log(util.inspect(twitterUserData));
-// 	});
-
+everyauth
+	.twitter
+	.consumerKey('JPKjV09pV05ShPYN1NUnhw')
+	.consumerSecret('y3i12vM6BYyAg4cdMfnWsB7EPZdZU1h8RE6bXZvcCM')
+	.findOrCreateUser(function (session, accessToken, accessTokenSecret, twitterUserData) {
+		console.log(util.inspect(twitterUserData));
+	});
 
 // Express configurations
 app.configure(function () {
@@ -20,8 +19,8 @@ app.configure(function () {
 	app.set('view options', { layout: false });
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'Test'}));
-	// app.use(everyauth.middleware());	
+	app.use(express.session({ secret: 'This is only a test!'}));
+	app.use(everyauth.middleware());	
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.static(__dirname + '/public'));
