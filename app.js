@@ -12,7 +12,7 @@ everyauth
 	.findOrCreateUser(function (session, accessToken, accessTokenSecret, twitterUserData) {
 		var promise = new Promise();
 		console.log(util.inspect(twitterUserData));
-		findOrCreateFromTwitterData(twitterUserData, promise);
+		question.findOrCreateFromTwitterData(twitterUserData, promise);
 		return promise;
 	})
 	.redirectPath('/');

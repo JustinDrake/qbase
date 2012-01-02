@@ -24,6 +24,7 @@ var User = mongoose.model('users',
 
 function findOrCreateFromTwitterData = function(twitterData, promise) {
 	console.log('Twitter data:', twitterData);
+	new User().save();
 	promise.fulfill({message: 'Yes!'});
 	return;
 }
