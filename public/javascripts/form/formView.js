@@ -38,6 +38,13 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 					console.error('Did not create the question!', response);
 				}
 			});
+
+			this.clearEntries();
+		},
+		clearEntries: function () {
+			$(this.el)
+				.find(':text')
+				.val('');
 		},
 		hide: function () {
 			$(this.el).hide(300);

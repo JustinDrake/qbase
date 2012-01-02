@@ -4,10 +4,10 @@ define(['underscore', 'backbone', 'questionList', 'autocomplete'],
 			el: '#searchview',
 			initialize: function () {
 				$(this.el)
-					.on('blur', '#searchinput', function () {
+					.on('click', '#searchbutton', function () {
 						$.ajax({
 							url: '/search',
-							data: $(this).val(),
+							data: $('#searchinput').val(),
 							success: function (data) {
 								questionList.reset(data);
 							},
