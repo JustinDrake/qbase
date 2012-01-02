@@ -16,13 +16,13 @@ var Question = mongoose.model('questions',
 );
 
 var User = mongoose.model('users',
-	new mongoose.Scheme({
+	new mongoose.Schema({
 		registrationDate : { type: Date, default: Date.now },
-		username : { type: String, default: [No username set!] }
+		username : { type: String, default: '[No username set!]' }
 	})
 );
 
-function findOrCreateFromTwitterData = function(twitterData, promise) {
+function findOrCreateFromTwitterData(twitterData, promise) {
 	console.log('Twitter data:', twitterData);
 	new User().save();
 	promise.fulfill({message: 'Yes!'});

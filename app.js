@@ -35,7 +35,7 @@ app.configure(function () {
 
 require('./routes/routes')(app, question);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 80);
 
 // Start a REPL for debugging
 // require('repl').start('> ').context.question = question;
