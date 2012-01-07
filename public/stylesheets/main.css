@@ -52,3 +52,11 @@
 #logout {
 	display: none;
 }
+
+.upvoted {
+	color: lime !important;
+}
+
+.downvoted {
+	color: red !important;
+}

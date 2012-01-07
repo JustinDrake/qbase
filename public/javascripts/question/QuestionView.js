@@ -1,10 +1,11 @@
-define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeago'], function (_, Backbone, questionTemplate) {
+define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'userModel', 'timeago'], function (_, Backbone, questionTemplate, userModel) {
 	var QuestionView = Backbone.View.extend({
 		initialize: function () {
 			this.model.bind('destroy', this.destroySelf, this);
 			this.model.bind('change:upVotes', this.refreshVotes, this);
 			this.model.bind('change:downVotes', this.refreshVotes, this);
 			this.render();
+			this.refreshVotes();
 			this.delegateEvents();
 		},
 		events: {
@@ -20,15 +21,19 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 			this.el.find('.votes').text(this.model.get('upVotes') - this.model.get('downVotes'));
 
 			// Reset the votes
-			this.el.find('.upvote, .downvote').css('color', 'white');
+			this.el.find('.upvote, .downvote').removeClass('upvoted downvoted');
 
 			var userVote = this.model.get('userVote');
-			console.log('userVote:', userVote);
+			console.log(userVote);
 
 			if (userVote === -1) {
-				this.el.find('.downvote').css('color', 'red');
+				this.el
+					.find('.downvote')
+					.addClass('downvoted');
 			} else if (userVote === 1) {
-				this.el.find('.upvote').css('color', 'lime');
+				this.el
+					.find('.upvote')
+					.addClass('upvoted');
 			}
 		},
 		destroyModel: function () {
@@ -45,26 +50,56 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 		},
 		upvote: function () {
 			var newUpVotes = this.model.get('upVotes') + 1;
+			var userId = userModel.get('_id');
 
-			console.log('Inside upvote');
-			this.model.set({
-				userVote : 1,
-				upVotes : newUpVotes
-			});
+			// Only consider votes from logged in users
+			if (userId) {
+				// Only change the votes if has not already voted
+				if (_.indexOf(this.model.get('upVoters'), userId) === -1) {
+					this.model.set({
+						userVote : 1,
+						upVotes : newUpVotes
+					});
 
-			console.log('userVote:', this.model.get('userVote'));
-			this.model.save();
+					this.model.set({
+						userModel: this.model.get('upVoters').push(userId)
+					});
+
+					this.model.save();
+				} else {
+					console.info('You have already voted, gready person!');
+					console.log(this.model.get('userVote'));
+				}
+			} else {
+				console.info('Cannot vote, not logged in!');
+			}
 		},
 		template: _.template(questionTemplate),
 		downvote: function () {
 			var newDownVotes = this.model.get('downVotes') + 1;
+			var userId = userModel.get('_id');
 
-			this.model.set({
-				userVote: -1,
-				downVotes : newDownVotes
-			});
+			// Only consider votes from logged in users
+			if (userId) {
+				// Only change the votes if has not already voted
+				if (_.indexOf(this.model.get('downVoters'), userId) === -1) {
+					this.model.set({
+						userVote : -1,
+						downVotes : newDownVotes
+					});
 
-			this.model.save();
+					this.model.set({
+						userModel: this.model.get('downVoters').push(userId)
+					});
+
+					this.model.save();
+				} else {
+					console.info('You have already voted, gready person!');
+					console.log(this.model.get('userVote'));
+				}
+			} else {
+				console.info('Cannot vote, not logged in!');
+			}
 		}
 	});
 

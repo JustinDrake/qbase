@@ -13,7 +13,7 @@ module.exports = function (app, question) {
 // QUESTIONS
 
 	app.get('/questions', function (request, response) {
-		question.latest(5, function (questions) {
+		question.latest(request.session.auth ? request.session.auth.twitter.user.id : undefined, 5, function (questions) {
 			response.send(questions);
 		});
 	});
@@ -46,7 +46,10 @@ module.exports = function (app, question) {
 
 	app.get('/user', function (request, response) {
 		if (request.session.auth && request.session.auth.loggedIn === true) {
-			response.json(request.session.auth.twitter.user.name);
+			response.json({
+				name: request.session.auth.twitter.user.name,
+				_id: request.session.auth.twitter.user.id
+			});
 		} else {
 			response.json(undefined);
 		}

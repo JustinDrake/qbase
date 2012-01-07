@@ -1,7 +1,8 @@
 //var mongoose = require('mongoose').connect('mongodb://localhost/qbase'),
 var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777');
+var _ = require('./underscore');
 
-var Question = mongoose.model('questions',
+var Question = mongoose.model('questions_debug',
 	new mongoose.Schema({
 		text : { type: String, default: '[The question goes here.]' },
 		date : { type: Date, default: Date.now },
@@ -10,10 +11,11 @@ var Question = mongoose.model('questions',
 		tags : { type: Array, default: [] },
 		author : { type: String, default: 'Anonymous' },
 		upVotes : { type: Number, default: 0 },
-		upVoter : { type: Array, default: []},
+		upVoters : { type: Array, default: [] },
 		downVotes : { type: Number, default: 0 },
-		downVoters : { type: Array, default: []},
-		views : { type: Number, default: 1}
+		downVoters : { type: Array, default: [] },
+		views : { type: Number, default: 1 },
+		userVote : { type: Number, default: 0 }
 	})
 );
 
@@ -88,14 +90,34 @@ function remove(id, next) {
 		});
 }
 
-function latest(limit, next) {
-
+function latest(userId, limit, next) {
 	Question
 		.find({})
 		.sort('date', -1)
 		.limit(limit)
 		.exec(
 			function (error, documents) {
+
+				if(userId) {
+					documents.forEach(function(document) {
+						if(_.indexOf(document.upVoters, userId) !== -1) {
+							document.userVote = 1;
+						} else if(_.indexOf(document.downVoters, userId) !== -1) {
+							document.userVote = -1;
+						} else {
+							document.userVote = 0;
+						}
+					});
+
+					documents.forEach(function(document) {
+						
+					});
+				} else {
+					console.log('No user is logged in!');
+				}
+
+				//console.log(documents)
+
 				if (error) {
 					console.error('Error in getting the latest questions.', error);
 				} else {

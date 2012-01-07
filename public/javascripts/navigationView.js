@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'formView', 'searchView'], function (_, Backbone, formView, searchView) {
+define(['underscore', 'backbone', 'formView', 'searchView', 'userModel'], function (_, Backbone, formView, searchView, userModel) {
 	var NavigationView = Backbone.View.extend({
 		el: '#navigation',
 		events: {
@@ -30,13 +30,17 @@ define(['underscore', 'backbone', 'formView', 'searchView'], function (_, Backbo
 				success: function (response) {
 					if (response) {
 						$('#username')
-							.text('Welcome, ' + response);
+							.text('Welcome, ' + response.name);
 							
 						$('#login')
 							.hide();
 
 						$('#logout')
 							.show();
+
+						userModel.set({
+							_id : response._id
+						});
 					} else {
 						console.log('No user connected!');
 					}

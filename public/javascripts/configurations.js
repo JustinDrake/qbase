@@ -11,7 +11,8 @@ require.config({
 		'tagsinput': 'dependencies/jQueryPlugins/jquery.tagsinput.min.js',
 		'navigationView': 'navigationView',
 		'searchView': 'search/searchView',
-		'autocomplete': 'dependencies/jQueryPlugins/jquery-ui-1.8.16.custom.min'
+		'autocomplete': 'dependencies/jQueryPlugins/jquery-ui-1.8.16.custom.min',
+		'userModel': 'userModel'
 	}
 });
 

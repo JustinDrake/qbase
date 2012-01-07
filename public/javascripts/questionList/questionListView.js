@@ -17,11 +17,15 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				$(this.el).on('mouseout', '.question', function () {
 					$(this)
 						.find('.upvote, .downvote, .remove')
+						.filter(':not(.upvoted)')
+						.filter(':not(.downvoted)')
 						.css('visibility', 'hidden');
 				});
 			},
 			el: '#questioncontainer',
 			addView: function (model) {
+				console.log(model);
+
 				var questionView = new QuestionView({
 					model: model
 				});
