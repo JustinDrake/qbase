@@ -2,7 +2,7 @@
 var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777');
 var _ = require('./underscore');
 
-var Question = mongoose.model('questions_debug',
+var Question = mongoose.model('questions',
 	new mongoose.Schema({
 		text : { type: String, default: '[The question goes here.]' },
 		date : { type: Date, default: Date.now },

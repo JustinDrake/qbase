@@ -24,7 +24,6 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'userMo
 			this.el.find('.upvote, .downvote').removeClass('upvoted downvoted');
 
 			var userVote = this.model.get('userVote');
-			console.log(userVote);
 
 			if (userVote === -1) {
 				this.el
@@ -49,57 +48,57 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'userMo
 			});
 		},
 		upvote: function () {
-			var newUpVotes = this.model.get('upVotes') + 1;
 			var userId = userModel.get('_id');
-
+			console.log(this.model.attributes);
 			// Only consider votes from logged in users
 			if (userId) {
 				// Only change the votes if has not already voted
 				if (_.indexOf(this.model.get('upVoters'), userId) === -1) {
-					this.model.set({
-						userVote : 1,
-						upVotes : newUpVotes
-					});
+					this.model.get('upVoters').push(userId);
 
 					this.model.set({
-						userModel: this.model.get('upVoters').push(userId)
+						userVote: 1,
+						upVotes: this.model.get('upVotes') + ((_.indexOf(this.model.get('downVoters'), userId) === -1) ? 1 : 2),
+						downVoters: _.without(this.model.get('downVoters'), userId)
 					});
 
 					this.model.save();
 				} else {
-					console.info('You have already voted, gready person!');
-					console.log(this.model.get('userVote'));
+					console.info('Question already upvoted!');
 				}
 			} else {
-				console.info('Cannot vote, not logged in!');
+				this.highlightLogin();
 			}
 		},
 		template: _.template(questionTemplate),
 		downvote: function () {
-			var newDownVotes = this.model.get('downVotes') + 1;
 			var userId = userModel.get('_id');
+			console.log(this.model.attributes);
 
 			// Only consider votes from logged in users
 			if (userId) {
 				// Only change the votes if has not already voted
 				if (_.indexOf(this.model.get('downVoters'), userId) === -1) {
-					this.model.set({
-						userVote : -1,
-						downVotes : newDownVotes
-					});
+					this.model.get('downVoters').push(userId);
 
 					this.model.set({
-						userModel: this.model.get('downVoters').push(userId)
+						userVote: -1,
+						downVotes: this.model.get('downVotes') + ((_.indexOf(this.model.get('upVoters'), userId) === -1) ? 1 : 2),
+						upVoters: _.without(this.model.get('upVoters'), userId)
 					});
 
 					this.model.save();
 				} else {
-					console.info('You have already voted, gready person!');
-					console.log(this.model.get('userVote'));
+					console.info('Question already downvoted!');
 				}
 			} else {
-				console.info('Cannot vote, not logged in!');
+				this.highlightLogin();
 			}
+		},
+		highlightLogin: function () {
+			$('#login')
+				.children()
+				.css('color', 'red');
 		}
 	});
 
