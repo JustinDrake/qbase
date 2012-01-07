@@ -11,8 +11,8 @@ everyauth
 	.consumerSecret('y3i12vM6BYyAg4cdMfnWsB7EPZdZU1h8RE6bXZvcCM')
 	.findOrCreateUser(function (session, accessToken, accessTokenSecret, twitterUserData) {
 		var promise = new Promise();
-		console.log(util.inspect(twitterUserData));
-		question.findOrCreateFromTwitterData(twitterUserData, promise);
+
+		question.findOrCreateFromTwitterData(twitterUserData, promise, session);
 		return promise;
 	})
 	.redirectPath('/');
@@ -38,4 +38,4 @@ require('./routes/routes')(app, question);
 app.listen(process.env.PORT || 4000);
 
 // Start a REPL for debugging
-// require('repl').start('> ').context.question = question;
+ require('repl').start('> ').context.everyauth = everyauth;

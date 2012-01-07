@@ -13,7 +13,6 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 			'click .downvote': 'downvote'
 		},
 		render: function () {
-			console.log('Rendering view');
 			return this.el = $(this.template(this.model.toJSON()));
 		},
 		refreshVotes: function () {
