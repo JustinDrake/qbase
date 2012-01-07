@@ -16,7 +16,20 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 			return this.el = $(this.template(this.model.toJSON()));
 		},
 		refreshVotes: function () {
+			// Refresh the difference in votes
 			this.el.find('.votes').text(this.model.get('upVotes') - this.model.get('downVotes'));
+
+			// Reset the votes
+			this.el.find('.upvote, .downvote').css('color', 'white');
+
+			var userVote = this.model.get('userVote');
+			console.log('userVote:', userVote);
+
+			if (userVote === -1) {
+				this.el.find('.downvote').css('color', 'red');
+			} else if (userVote === 1) {
+				this.el.find('.upvote').css('color', 'lime');
+			}
 		},
 		destroyModel: function () {
 			this.model.destroy();
@@ -32,17 +45,22 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'timeag
 		},
 		upvote: function () {
 			var newUpVotes = this.model.get('upVotes') + 1;
+
+			console.log('Inside upvote');
 			this.model.set({
+				userVote : 1,
 				upVotes : newUpVotes
 			});
 
+			console.log('userVote:', this.model.get('userVote'));
 			this.model.save();
 		},
 		template: _.template(questionTemplate),
 		downvote: function () {
-			console.log('Test')
 			var newDownVotes = this.model.get('downVotes') + 1;
+
 			this.model.set({
+				userVote: -1,
 				downVotes : newDownVotes
 			});
 

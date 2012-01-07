@@ -9,7 +9,8 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 			upVotes: 0,
 			views: 0,
 			tags: [],
-			wrongAnswers: []
+			wrongAnswers: [],
+			userVote: 0
 		}
 	});
 

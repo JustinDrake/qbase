@@ -10,7 +10,9 @@ var Question = mongoose.model('questions',
 		tags : { type: Array, default: [] },
 		author : { type: String, default: 'Anonymous' },
 		upVotes : { type: Number, default: 0 },
+		upVoter : { type: Array, default: []},
 		downVotes : { type: Number, default: 0 },
+		downVoters : { type: Array, default: []},
 		views : { type: Number, default: 1}
 	})
 );

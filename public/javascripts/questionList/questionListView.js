@@ -4,9 +4,9 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 			initialize: function () {
 				this.collection.bind('add', this.addView, this);
 				this.collection.bind('reset', this.reset, this);
-				this.collection.bind('all', function (event) {
-					console.log(event);
-				});
+				// this.collection.bind('all', function (event) {
+				// 	console.log(event);
+				// });
 
 				$(this.el).on('mouseover', '.question', function () {
 					$(this)
