@@ -5,6 +5,12 @@ define(['underscore', 'backbone', 'formView', 'searchView'], function (_, Backbo
 			'click #showform': 'showForm',
 			'click #showsearch': 'showSearch'
 		},
+		initialize: function () {
+			var self = this;
+			$(function () {
+				self.getUserInformation();
+			});
+		},
 		showForm: function (event) {
 			$('.active').removeClass('active');
 			$(event.currentTarget).parent().addClass('active');
@@ -16,6 +22,29 @@ define(['underscore', 'backbone', 'formView', 'searchView'], function (_, Backbo
 			$(event.currentTarget).parent().addClass('active');			
 			$(searchView.el).show();
 			$(formView.el).hide();
+		},
+		getUserInformation: function () {
+			$.ajax({
+				url: '/user',
+				type: 'GET',
+				success: function (response) {
+					if (response) {
+						$('#username')
+							.text('Welcome, ' + response);
+							
+						$('#login')
+							.hide();
+
+						$('#logout')
+							.show();
+					} else {
+						console.log('No user connected!');
+					}
+				},
+				error: function () {
+					console.error('Error in getting the user information');
+				}
+			});
 		}
 	});
 

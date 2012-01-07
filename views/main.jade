@@ -18,14 +18,15 @@ html(lang='en')
 							a#showform(href='#') Contribute a question
 						li
 							a#showsearch(href='#') Search by Wikipedia article
+					ul#authenticate
+						li
+							a#username(href='#')
+						li#login
+							a(href='/auth/twitter') Log in with Twitter
+						li#logout
+							a(href='logout') Log out
 
 		center
-			div#authenticate
-				br
-				br
-				br
-				a.btn(href='/auth/twitter') Log in with Twitter
-				a.btn(href='/auth/logout') Log out of Twitter
 			form#searchview
 				input#searchinput.span9(type='text', placeholder='Which Wikipedia article?')
 				br

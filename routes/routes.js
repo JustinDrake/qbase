@@ -41,4 +41,14 @@ module.exports = function (app, question) {
 			});
 		}
 	});
+
+// USER
+
+	app.get('/user', function (request, response) {
+		if (request.session.auth && request.session.auth.loggedIn === true) {
+			response.json(request.session.auth.twitter.user.name);
+		} else {
+			response.json(undefined);
+		}
+	});
 }

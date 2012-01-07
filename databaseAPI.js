@@ -24,9 +24,6 @@ var User = mongoose.model('users',
 );
 
 function findOrCreateFromTwitterData(twitterData, promise, session) {
-	console.log('Twitter name:', twitterData.name, 'Twitter id:', twitterData.id);
-	console.log('Session:', session);
-
 	User.find({
 		twitterId: twitterData.id
 	}, function (error, document) {
@@ -34,21 +31,17 @@ function findOrCreateFromTwitterData(twitterData, promise, session) {
 			console.error('Error in finding user with this ID!');
 		} else {
 			if (document.length) {
-				console.log('Got a user with this Twitter ID!', document);
-
 				promise.fulfill({
 					user: document,
 					message: 'User exists, welcome!'
 				});
 			} else {
-				console.log('Creating new user!');
-
 				var newUser = new User({
 					twitterId: twitterData.id,
 					username: twitterData.name
 				}).save(function (error) {
 					if (error) {
-						console.log('Error in saving the new user!');
+						console.error('Error in saving the new user!');
 					} else {
 						promise.fulfill({
 							user: newUser,

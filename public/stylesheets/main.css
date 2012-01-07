@@ -44,3 +44,11 @@
 .upvote, .downvote, .remove {
 	visibility: hidden;
 }
+
+#authenticate {
+	float: right;
+}
+
+#logout {
+	display: none;
+}
