@@ -1,4 +1,5 @@
 var Question = require('./../schemas/QuestionSchema');
+var _ = require('./../../public/javascripts/dependencies/underscore');
 
 function add(request, next) {
 	var question = request.body;

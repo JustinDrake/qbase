@@ -1,5 +1,4 @@
 module.exports = function (app, question) {
-
 	function sendOK(response) {
 		response.send();
 	}
