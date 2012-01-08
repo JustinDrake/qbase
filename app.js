@@ -1,6 +1,7 @@
 var express = require('express'),
     everyauth = require('everyauth'),
-	question = require('./databaseAPI'),
+	question = require('./private/APIs/questionAPI');
+	user = require('./private/APIs/userAPI'),
 	util = require('util'),
 	Promise = everyauth.Promise,
 	app = express.createServer();
@@ -12,7 +13,7 @@ everyauth
 	.findOrCreateUser(function (session, accessToken, accessTokenSecret, twitterUserData) {
 		var promise = new Promise();
 
-		question.findOrCreateFromTwitterData(twitterUserData, promise, session);
+		user.findOrCreateFromTwitterData(twitterUserData, promise, session);
 		return promise;
 	})
 	.redirectPath('/')
