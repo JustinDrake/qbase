@@ -1,9 +1,10 @@
-define(['underscore', 'backbone', 'formView', 'searchView', 'userModel'], function (_, Backbone, formView, searchView, userModel) {
+define(['underscore', 'backbone', 'formView', 'searchView', 'userModel', 'questionList'], function (_, Backbone, formView, searchView, userModel, questionList) {
 	var NavigationView = Backbone.View.extend({
 		el: '#navigation',
 		events: {
 			'click #showform': 'showForm',
-			'click #showsearch': 'showSearch'
+			'click #showsearch': 'showSearch',
+			'click #mainlink': 'refreshContent'
 		},
 		initialize: function () {
 			var self = this;
@@ -47,6 +48,9 @@ define(['underscore', 'backbone', 'formView', 'searchView', 'userModel'], functi
 					console.error('Error in getting the user information');
 				}
 			});
+		},
+		refreshContent: function () {
+			questionList.populate();
 		}
 	});
 
