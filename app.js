@@ -15,7 +15,12 @@ everyauth
 		question.findOrCreateFromTwitterData(twitterUserData, promise, session);
 		return promise;
 	})
-	.redirectPath('/');
+	.redirectPath('/')
+	.handleLogout(function (request, response) {
+		request.logout();
+
+		response.json('Logout successful');
+	});
 
 // Express configurations
 app.configure(function () {

@@ -10,6 +10,16 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 		initialize: function () {
 			_.bindAll(this, 'addQuestion');
 
+			// $('#articleinput')
+			// 	.chosen();
+
+			// $('#articleinput')
+			// 	.tokenInput('https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&limit=5', {
+			// 		queryParam: 'search',
+			// 		resultsFormatter: function(item){ return "<li>" + item + "</li>" },
+			// 		tokenFormatter: function(item) { return "<li><p>" + item + "</p></li>" }
+			// 	});
+
 			$('#articleinput')
 				.autocomplete({
 					source: function(request, response) {
@@ -22,6 +32,15 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 						});
 					}
 				});
+
+			// $('#articleinput')
+			// 	.fcbkcomplete({
+			// 		json_url: 'https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&limit=5&callback=?',
+			// 		cache: true,
+			// 		filter_case: true,
+			// 		filter_hide: true,
+			// 		newel: true
+			// 	});
 		},
 		addQuestion: function () {
 			var $el = $(this.el);

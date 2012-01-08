@@ -12,7 +12,9 @@ require.config({
 		'navigationView': 'navigationView',
 		'searchView': 'search/searchView',
 		'autocomplete': 'dependencies/jQueryPlugins/jquery-ui-1.8.16.custom.min',
-		'userModel': 'userModel'
+		'userModel': 'userModel',
+		'chosen': 'dependencies/jQueryPlugins/jquery.chosen',
+		'fcbkcomplete': 'dependencies/jQueryPlugins/jquery.fcbkcomplete.min'
 	}
 });
 

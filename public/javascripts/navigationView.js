@@ -4,7 +4,8 @@ define(['underscore', 'backbone', 'formView', 'searchView', 'userModel', 'questi
 		events: {
 			'click #showform': 'showForm',
 			'click #showsearch': 'showSearch',
-			'click #mainlink': 'refreshContent'
+			'click #mainlink': 'refreshContent',
+			'click #logout': 'logout'
 		},
 		initialize: function () {
 			var self = this;
@@ -42,6 +43,15 @@ define(['underscore', 'backbone', 'formView', 'searchView', 'userModel', 'questi
 						userModel.set({
 							_id : response._id
 						});
+					} else {
+						$('#username')
+							.text('');
+
+						$('#login')
+							.show();
+
+						$('#logout')
+							.hide();
 					}
 				},
 				error: function () {
@@ -51,6 +61,20 @@ define(['underscore', 'backbone', 'formView', 'searchView', 'userModel', 'questi
 		},
 		refreshContent: function () {
 			questionList.populate();
+		},
+		logout: function () {
+			var self = this;
+			$.ajax({
+				url: '/logout',
+				type: 'GET',
+				success: function() {
+					self.refreshContent();
+					self.getUserInformation();
+				},
+				error: function () {
+					console.error('Errorr in logging out');
+				}
+			});
 		}
 	});
 
