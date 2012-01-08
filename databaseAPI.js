@@ -203,7 +203,8 @@ function save(question) {
 		if (!document) {
 			console.error('No document to update!');
 		} else {
-			document.modified = new Date();
+		//	The below line causes the app to crash on the server?!
+		//	document.modified = new Date();
 
 			for(attribute in question) {
 				document[attribute] = question[attribute];
