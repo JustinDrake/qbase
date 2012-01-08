@@ -1,5 +1,4 @@
-//var mongoose = require('mongoose').connect('mongodb://localhost/qbase'),
-var mongoose = require('mongoose').connect('mongodb://justin:camparifred@staff.mongohq.com:10006/app2220777');
+var mongoose = require('mongoose').connect('mongodb://localhost/qbase');
 var _ = require('./underscore');
 
 var Question = mongoose.model('questions_new',
