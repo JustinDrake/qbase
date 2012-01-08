@@ -1,0 +1,1 @@
+define(["underscore","backbone","QuestionModel","text!templates/questionTemplate.html"],function(a,b,c,d){var e=b.Collection.extend({model:c,url:"/questions",initialize:function(){this.populate()},populate:function(){this.fetch({error:function(a,b){console.error("Error in fetching the questions!",b)}})}});return new e})

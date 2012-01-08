@@ -1,0 +1,28 @@
+
+#formview, #searchview {
+	margin-top: 50px;
+}
+#formview > *, #searchview > * {
+	margin: 8px;
+}
+#searchview {
+	display: none;
+}
+.upvote, .downvote, .remove {
+	visibility: hidden;
+}
+#authenticate {
+	float: right;
+}
+#logout {
+	display: none;
+}
+.upvoted {
+	color: lime !important;
+}
+.downvoted {
+	color: red !important;
+}
+.upvote, .downvote, .tags, .remove {
+	cursor: pointer;
+}

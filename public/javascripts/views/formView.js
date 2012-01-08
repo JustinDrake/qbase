@@ -5,7 +5,7 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 		el: '#formview',
 		events: {
 			'click #addbutton': 'addQuestion',
-			'click #cancelbutton': 'hide',
+			'click #cancelbutton': 'hide'
 		},
 		initialize: function () {
 			_.bindAll(this, 'addQuestion');
@@ -50,7 +50,7 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 				answer: $el.find('#answerinput').val() === '' ? undefined : $el.find('#answerinput').val(),
 				wrongAnswers: $el.find('#wronganswersinput').val() === '' ? undefined : $el.find('#wronganswersinput').val().split(';'),
 				tags: $el.find('#tagsinput').val() === '' ? undefined : $el.find('#articleinput').val().split(';'),
-				date: new Date().toISOString(), // WARNING -> toISOString is not implemented in all browsers
+				date: new Date().toISOString() // WARNING -> toISOString is not implemented in all browsers
 			}, {
 				error: function (collection, response) {
 					console.error('Did not create the question!', response);
