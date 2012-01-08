@@ -64,14 +64,20 @@ function getIP(request) {
 
 function add(request, next) {
 	var question = request.body;
+	console.log(request.session.auth);
+	if (request.session.auth) {
+		question.author = request.session.auth.twitter.user.name;
+	} else {
+		question.author = getIP(request);
+	}
 
-	question.author = getIP(request);
+	var newQuestion = (new Question(question));
 
-	(new Question(question)).save(function (error) {
+	newQuestion.save(function (error) {
 		if (error) {
 			console.error('Error when adding a new question.', error);
 		} else if (next) {
-			next();
+			next(newQuestion);
 		}
 	});
 }
@@ -97,30 +103,25 @@ function latest(userId, limit, next) {
 		.limit(limit)
 		.exec(
 			function (error, documents) {
-
-				if(userId) {
-					documents.forEach(function(document) {
-						if(_.indexOf(document.upVoters, userId) !== -1) {
-							document.userVote = 1;
-						} else if(_.indexOf(document.downVoters, userId) !== -1) {
-							document.userVote = -1;
-						} else {
-							document.userVote = 0;
-						}
-					});
-
-					documents.forEach(function(document) {
-						
-					});
-				} else {
-					console.log('No user is logged in!');
-				}
-
-				//console.log(documents)
-
 				if (error) {
 					console.error('Error in getting the latest questions.', error);
 				} else {
+					// Set `userVote` for UI info
+					if(userId) {
+						documents.forEach(function(document) {
+							if(_.indexOf(document.upVoters, userId) !== -1) {
+								document.userVote = 1;
+							} else if(_.indexOf(document.downVoters, userId) !== -1) {
+								document.userVote = -1;
+							} else {
+								document.userVote = 0;
+							}
+						});
+					} else {
+						documents.forEach(function(document) {
+							document.userVote = 0;
+						});
+					}
 
 					// Bump the view count of all requested documents
 					Question.update(documents, {

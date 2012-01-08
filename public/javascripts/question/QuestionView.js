@@ -49,7 +49,7 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'userMo
 		},
 		upvote: function () {
 			var userId = userModel.get('_id');
-			console.log(this.model.attributes);
+
 			// Only consider votes from logged in users
 			if (userId) {
 				// Only change the votes if has not already voted
@@ -73,7 +73,6 @@ define(['underscore', 'backbone', 'text!question/questionTemplate.html', 'userMo
 		template: _.template(questionTemplate),
 		downvote: function () {
 			var userId = userModel.get('_id');
-			console.log(this.model.attributes);
 
 			// Only consider votes from logged in users
 			if (userId) {

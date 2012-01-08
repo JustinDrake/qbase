@@ -19,7 +19,9 @@ module.exports = function (app, question) {
 	});
 
 	app.post('/questions', function (request, response) {
-		question.add(request, sendOK(response));
+		question.add(request, function (question) {
+			response.send(question);
+		});
 	});
 
 	app.delete('/questions/:id', function (request, response) {

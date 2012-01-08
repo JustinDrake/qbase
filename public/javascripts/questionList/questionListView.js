@@ -40,6 +40,7 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 						.fadeIn();						
 				});
 
+				// This is not optimal
 				$('.timeago').timeago();
 			},
 			reset: function () {

@@ -41,8 +41,6 @@ define(['underscore', 'backbone', 'formView', 'searchView', 'userModel'], functi
 						userModel.set({
 							_id : response._id
 						});
-					} else {
-						console.log('No user connected!');
 					}
 				},
 				error: function () {

@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'QuestionModel', 'QuestionView', 'questionList', 'autocomplete'],
+define(['underscore', 'backbone', 'QuestionModel', 'QuestionView', 'questionList', 'autocomplete', 'userModel'],
 
 function (_, Backbone, QuestionModel, QuestionView, questionList) {
 	var FormView = Backbone.View.extend({
@@ -26,13 +26,12 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 		addQuestion: function () {
 			var $el = $(this.el);
 
-			console.log('Creating question...');
 			var newQuestion = questionList.create({
 				text: $el.find('#textinput').val() === '' ? undefined : $el.find('#textinput').val(),
 				answer: $el.find('#answerinput').val() === '' ? undefined : $el.find('#answerinput').val(),
 				wrongAnswers: $el.find('#wronganswersinput').val() === '' ? undefined : $el.find('#wronganswersinput').val().split(';'),
 				tags: $el.find('#tagsinput').val() === '' ? undefined : $el.find('#articleinput').val().split(';'),
-				date: new Date().toISOString() // WARNING -> toISOString is not implemented in all browsers
+				date: new Date().toISOString(), // WARNING -> toISOString is not implemented in all browsers
 			}, {
 				error: function (collection, response) {
 					console.error('Did not create the question!', response);
@@ -50,7 +49,6 @@ function (_, Backbone, QuestionModel, QuestionView, questionList) {
 			$(this.el).hide(300);
 		},
 		show: function () {
-			console.log('Inside formView show');
 			$(this.el).show(300);
 		}
 	});
