@@ -1,21 +1,41 @@
 require.config({
 	paths: {
-		'underscore': 'dependencies/underscore',
-		'backbone': 'dependencies/backbone',
-		'formView': 'form/formView',
-		'questionList': 'questionList/questionList',
-		'questionListView': 'questionList/questionListView',
-		'QuestionModel': 'question/QuestionModel',
-		'QuestionView': 'question/QuestionView',
-		'timeago': 'dependencies/jQueryPlugins/jquery.timeago',
-		'tagsinput': 'dependencies/jQueryPlugins/jquery.tagsinput.min.js',
-		'navigationView': 'navigationView',
-		'searchView': 'search/searchView',
-		'autocomplete': 'dependencies/jQueryPlugins/jquery-ui-1.8.16.custom.min',
-		'userModel': 'userModel',
-		'chosen': 'dependencies/jQueryPlugins/jquery.chosen',
-		'fcbkcomplete': 'dependencies/jQueryPlugins/jquery.fcbkcomplete.min'
+		/* HARD DEPENDENCIES */
+		'underscore': 		'dependencies/underscore',
+		'backbone': 		'dependencies/backbone',		
+
+		/* VIEWS */
+		'QuestionView': 	'views/QuestionView',
+		'formView': 		'views/formView',		
+		'navigationView': 	'views/navigationView',
+		'searchView': 		'views/searchView',
+		'questionListView': 'views/questionListView',		
+
+		/* MODELS */
+		'QuestionModel': 	'models/QuestionModel',
+		'userModel': 		'models/userModel',
+		
+		/* COLLECTIONS */
+		'questionList': 	'collections/questionList',
+
+		/* JQUERY PLUGINS */
+		'timeago': 			'jQueryPlugins/jquery.timeago',
+		'autocomplete': 	'jQueryPlugins/jquery-ui-1.8.16.custom.min'
 	}
 });
 
-require(['app']);
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'formView',
+	'questionListView',
+	'searchView',
+	'navigationView'
+], function ($, _, Backbone) {
+	if ($ && _ && Backbone) {
+	//	console.info('jquery', $().jquery, 'underscore', _.VERSION, 'Backbone', Backbone.VERSION);
+	} else {
+		console.error('A module is missing!');
+	}
+});

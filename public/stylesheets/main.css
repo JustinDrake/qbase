@@ -60,3 +60,7 @@
 .downvoted {
 	color: red !important;
 }
+
+.upvote, .downvote, .tags, .remove {
+	cursor: pointer;
+}

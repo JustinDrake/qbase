@@ -35,8 +35,6 @@ module.exports = function (app, question) {
 // SEARCH
 
 	app.get('/search', function (request, response) {
-		console.log('User session: ', request.session);
-
 		for(var a in request.query) {
 			question.search(a, function (documents) {
 				response.send(documents);
