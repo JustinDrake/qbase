@@ -1,4 +1,5 @@
-define(['underscore', 'backbone', 'questionList', 'QuestionView'],
+define(
+	['underscore', 'backbone', 'questionList', 'QuestionView'],
 	function (_, Backbone, questionList, QuestionView) {
 		var QuestionListView = Backbone.View.extend({
 			initialize: function () {
@@ -37,7 +38,7 @@ define(['underscore', 'backbone', 'questionList', 'QuestionView'],
 				$(function () {
 					questionView.el
 						.prependTo(element)
-						.fadeIn();						
+						.fadeIn();
 				});
 
 				// This is not optimal

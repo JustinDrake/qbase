@@ -1,4 +1,5 @@
-define(['underscore', 'backbone', 'questionList', 'autocomplete'],
+define(
+	['underscore', 'backbone', 'questionList', 'autocomplete'],
 	function (_, Backbone, questionList) {
 		var SearchView = Backbone.View.extend({
 			el: '#searchview',
@@ -19,11 +20,11 @@ define(['underscore', 'backbone', 'questionList', 'autocomplete'],
 
 				$('#searchinput')
 					.autocomplete({
-						source: function(request, response) {
+						source: function (request, response) {
 							$.ajax({
 								url: 'https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&limit=5&search=' + request.term + '&callback=?',
 								dataType: 'jsonp',
-								success: function(data) {
+								success: function (data) {
 									response(data[1]);
 								}
 							});
@@ -32,8 +33,6 @@ define(['underscore', 'backbone', 'questionList', 'autocomplete'],
 			}
 		});
 
-		var searchView = new SearchView();
-
-		return searchView;
+		return new SearchView();
 	}
 );
