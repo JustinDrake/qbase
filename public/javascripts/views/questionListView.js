@@ -46,8 +46,11 @@ define(
 			},
 			reset: function () {
 				$(this.el).empty();
-				for(var a in this.collection.models) {
+				for (var a in this.collection.models) {
 					this.addView(this.collection.models[a]);
+				}
+				if (this.collection.models.length === 0) {
+					$('#nomatch').show();
 				}
 			}
 		});

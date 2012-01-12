@@ -1,44 +1,16 @@
-/*.votes, .text, .answer, .question, .tags {
-	margin: 15px;
-	padding: 5px;
-	border-radius: 3px;
-}
-
-.votes, .text, .answer, .tags {
-	background-color: rgb(200, 200, 200);
-}
-
-#formview {
-	margin: 0 auto;
-	display: block;
-	padding: 5px;
-	background-color: #CCC;
-	border-radius: 5px;
-}
-
-.upvote, .downvote, #formview > * {
-	margin: 5px;
-	padding: 5px;
-	border: 0px;
-	border-radius: 3px;
-	background-color: #000;
-	color: #CCC;
-}
-
-#textinput, #wronganswersinput {
-	width: 400px;
-}*/
-
-#formview, #searchview {
-	margin-top: 50px;
-}
-
-#formview > *, #searchview > * {
+#searchview *, #formview * {
 	margin: 8px;
 }
 
 #searchview {
+	margin-top: 50px;
+}
+
+#formview {
 	display: none;
+	margin: 20px;
+	padding: 20px;
+	background-color: #EEEEEE;
 }
 
 .upvote, .downvote, .remove {
@@ -63,4 +35,15 @@
 
 .upvote, .downvote, .tags, .remove {
 	cursor: pointer;
+}
+
+#nomatch {
+	display: none;
+	font-size: 15px;
+}
+
+#contribute {
+	font-size: 17px;
+	color: #777777;
+	text-decoration: underline;
 }

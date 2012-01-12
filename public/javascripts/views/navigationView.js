@@ -5,8 +5,7 @@ define(
 		var NavigationView = Backbone.View.extend({
 			el: '#navigation',
 			events: {
-				'click #showform': 'showForm',
-				'click #showsearch': 'showSearch',
+				'click #showform': 'toggleNewQuestionForm',
 				'click #mainlink': 'refreshContent',
 				'click #logout': 'logout'
 			},
@@ -16,17 +15,9 @@ define(
 					self.getUserInformation();
 				});
 			},
-			showForm: function (event) {
-				$('.active').removeClass('active');
-				$(event.currentTarget).parent().addClass('active');
-				$(formView.el).show();
-				$(searchView.el).hide();
-			},
-			showSearch: function (event) {
-				$('.active').removeClass('active');
-				$(event.currentTarget).parent().addClass('active');			
-				$(searchView.el).show();
-				$(formView.el).hide();
+			toggleNewQuestionForm: function (event) {
+				$(event.currentTarget).parent().toggleClass('active');
+				$(formView.el).toggle(500);
 			},
 			getUserInformation: function () {
 				$.ajax({
@@ -36,7 +27,7 @@ define(
 						if (response) {
 							$('#username')
 								.text('Welcome, ' + response.name);
-								
+
 							$('#login')
 								.hide();
 

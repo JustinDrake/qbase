@@ -3,21 +3,23 @@ define(
 	function (_, Backbone, questionList) {
 		var SearchView = Backbone.View.extend({
 			el: '#searchview',
-			initialize: function () {
-				$(this.el)
-					.on('click', '#searchbutton', function () {
-						$.ajax({
-							url: '/search',
-							data: $('#searchinput').val(),
-							success: function (data) {
-								questionList.reset(data);
-							},
-							error: function () {
-								console.error('Error in getting the search results!');
-							}
-						});
-					});
-
+			events: {
+				'click #explore': 'performSearch',
+				'click #searchbutton': 'performSearch'
+			},
+			performSearch: function () {
+				$.ajax({
+					url: '/search',
+					data: $('#searchinput').val(),
+					success: function (data) {
+						questionList.reset(data);
+					},
+					error: function () {
+						console.error('Error in getting the search results!');
+					}
+				});
+			},
+			initialiseAutocomplete: function () {
 				$('#searchinput')
 					.autocomplete({
 						source: function (request, response) {
@@ -30,6 +32,9 @@ define(
 							});
 						}
 					});
+			},
+			initialize: function () {
+				this.initialiseAutocomplete();
 			}
 		});
 

@@ -14,10 +14,9 @@ html(lang='en')
 					h3
 						a#mainlink QuestionBank
 					ul
-						li.active
-							a#showform(href='#') Contribute a question
 						li
-							a#showsearch(href='#') Search by Wikipedia article
+							a#showform(href='#') Contribute a question
+
 					ul#authenticate
 						li
 							a#username(href='#')
@@ -29,11 +28,15 @@ html(lang='en')
 		center
 			form#searchview
 				input#searchinput.span9(type='text', placeholder='Choose a Wikipedia article')
-				br
-				input#searchbutton.primary.btn(type='button', value='Search')
-				input#cancelsearch.btn(type='button', value='Cancel search')
+				input#explore.primary.btn(type='button', value='Explore')
 
-			form#formview
+		table.zebra-striped
+			tbody#questioncontainer
+				center
+					span#nomatch Sorry, there are no questions for your query. You are welcome to contribute a question!
+
+		center
+			form#formview.alert-message.block-message
 				input#articleinput.span9(type='text', placeholder='Choose a Wikipedia article')
 				br
 				input#textinput.span9(type='text', placeholder='What is your question?', maxlength='140')
@@ -42,7 +45,4 @@ html(lang='en')
 				input#wronganswersinput.span4(type='text', placeholder='Some wrong answers')
 				br
 				input#addbutton.primary.btn(type='button', value='Add question')
-				input#cancelbutton.btn(type='button', value='Hide form')
-
-		table.zebra-striped
-			tbody#questioncontainer
+				input#cancelbutton.btn(type='button', value='Not now')

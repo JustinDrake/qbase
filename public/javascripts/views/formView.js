@@ -6,20 +6,10 @@ define(
 			el: '#formview',
 			events: {
 				'click #addbutton': 'addQuestion',
-				'click #cancelbutton': 'hide'
+				'click #cancelbutton': 'toggle',
 			},
 			initialize: function () {
 				_.bindAll(this, 'addQuestion');
-
-				// $('#articleinput')
-				// 	.chosen();
-
-				// $('#articleinput')
-				// 	.tokenInput('https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&limit=5', {
-				// 		queryParam: 'search',
-				// 		resultsFormatter: function(item){ return "<li>" + item + "</li>" },
-				// 		tokenFormatter: function(item) { return "<li><p>" + item + "</p></li>" }
-				// 	});
 
 				$('#articleinput')
 					.autocomplete({
@@ -33,15 +23,6 @@ define(
 							});
 						}
 					});
-
-				// $('#articleinput')
-				// 	.fcbkcomplete({
-				// 		json_url: 'https://en.wikipedia.org/w/api.php?action=opensearch&namespace=0&limit=5&callback=?',
-				// 		cache: true,
-				// 		filter_case: true,
-				// 		filter_hide: true,
-				// 		newel: true
-				// 	});
 			},
 			addQuestion: function () {
 				var $el = $(this.el);
@@ -65,8 +46,8 @@ define(
 					.find(':text')
 					.val('');
 			},
-			hide: function () {
-				$(this.el).hide(300);
+			toggle: function () {
+				$('#showform').click();
 			},
 			show: function () {
 				$(this.el).show(300);
