@@ -1,11 +1,12 @@
-Copyright Justin Drake
-License pending
+This piece of software is copyright of Justin Drake, and licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported license, available at http://creativecommons.org/licenses/by-nc/3.0/legalcode. If this license is too restrictive for your needs, please send me a message and I will consider releasing the code under a more permissive license.
 
-This piece of software is a [Node](nodejs.org)-based web app.
+# Description
+
+This piece of software is a [Node](nodejs.org)-based web app to facilitate crowd sourced question creation.
 
 # Dependencies
 
-The dependencies are specified in the `package.json` file. They are:
+The Node.JS dependencies are specified in the `package.json` file. They are:
 
 * express (version 2.5.2)
 * jade (version 0.19.0)
@@ -21,12 +22,12 @@ The dependencies are specified in the `package.json` file. They are:
 
 ## Configurations
 
-1 - To make Twitter authentication work from `localhost` if you are using the Heroku remote database, you will need to change the file `/etc/hosts` and add the line
+1 - If using the given Heroku remote database, and wish to work under `localhost`, please add the following line to the file `/etc/hosts`:
 
 > 127.0.0.1       pure-fog-1978.herokuapp.com
 
 ## Launching the server
 
-1 - If you are using a local database (not enabled by default) then you need to launch a mongo instance. (In the command line, type `mongo`.)
-2 - From the Git repository base folder, type `node app.js`.
-3 - Launch a browser and type `localhost:4000`.
+1 - (optional) If you are using a local database (not enabled by default) then you need to launch a mongo instance. (In the command line, type `mongo`.)
+2 - From the Git repository base folder, launch the app. (In the command line, type `node app.js`.)
+3 - If you are working form `localhost` then go to `localhost:4000`.
