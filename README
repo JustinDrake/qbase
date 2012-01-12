@@ -1,2 +1,32 @@
 Copyright Justin Drake
 License pending
+
+This piece of software is a [Node](nodejs.org)-based web app.
+
+# Dependencies
+
+The dependencies are specified in the `package.json` file. They are:
+
+* express (version 2.5.2)
+* jade (version 0.19.0)
+* mongoose (version 2.4.7)
+* everyauth (0.2.27)
+
+# Getting started out-of-the-box
+## Installation
+
+1 - Install the latest version of Node
+2 - Install the latest version of MongoDB
+3 - Clone the Git repository to your server
+
+## Configurations
+
+1 - To make Twitter authentication work from `localhost` if you are using the Heroku remote database, you will need to change the file `/etc/hosts` and add the line
+
+> 127.0.0.1       pure-fog-1978.herokuapp.com
+
+## Launching the server
+
+1 - If you are using a local database (not enabled by default) then you need to launch a mongo instance. (In the command line, type `mongo`.)
+2 - From the Git repository base folder, type `node app.js`.
+3 - Launch a browser and type `localhost:4000`.
